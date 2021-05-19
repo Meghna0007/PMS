@@ -1,0 +1,16 @@
+
+<app-add-todo (todoAdd) = addTodo($event)></app-add-todo>
+<h4>Your Properties</h4>
+<div *ngIf="this.todos.length===0; else elseBlock">No Property is here.</div>
+<ng-template #elseBlock>
+    <div class="container">
+<div class="row">
+    <div *ngFor="let todo of todos">
+        <app-property-item [todo] = "todo" (todoDelete)= deleteTodo($event)></app-property-item>
+        
+    </div>
+    </div>
+</div>
+</ng-template>
+
+
