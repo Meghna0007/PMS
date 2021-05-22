@@ -7,6 +7,9 @@ import { PropertyComponent } from './MyComponents/property/property.component';
 import { PropertyItemComponent } from './MyComponents/property-item/property-item.component';
 import { AddTodoComponent } from './MyComponents/add-todo/add-todo.component';
 import { FormsModule } from '@angular/forms';
+import { NgxAirtableModule } from 'ngx-airtable';
+
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,8 +20,10 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxAirtableModule.forRoot({ apiKey: 'keyLx1P0ufhI8Xmt1' })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,11 +15,13 @@ export class PropertyItemComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log("Inside property item init");
+    console.log(this.todo);
   }
  onClick(todo: Todo){
    this.todoDelete.emit(todo);
 
-   console.log("onClick has been triggered")
+   console.log(Response);
  }
  onCheckboxClick(){
    

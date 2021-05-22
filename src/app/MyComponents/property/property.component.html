@@ -6,6 +6,7 @@
     <div class="container">
 <div class="row">
     <div *ngFor="let todo of todos">
+        
         <app-property-item [todo] = "todo" (todoDelete)= deleteTodo($event)></app-property-item>
         
     </div>

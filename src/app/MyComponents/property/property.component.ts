@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import{Todo} from '../../Todo'
+import{Records}from '../../Records'
+import { ConfigService } from '../../config.service'
+import { from } from 'rxjs';
 
 
 @Component({
@@ -9,34 +12,44 @@ import{Todo} from '../../Todo'
 })
 export class PropertyComponent implements OnInit {
  
- todos:Todo[];
+ todos:Todo[]=[];
+ records!: Records[];
+ 
+  constructor(private configService: ConfigService) { 
 
-  constructor() { 
-    this.todos=[
-    {
-      title: "Almeria",
-      desc: "This is amazing place",
-      size: "1000 sqft",
-      active:true
-    },
-    {
-      title: "GurgaonOne",
-      desc: "This is amazing place",
-      size: "2000 sqft",
-      active:true
-    },
-    {
-      title: "Hyatt",
-      desc: "This is amazing place",
-      size: "3000 sqft",
-      active:false
-    }
-    ]
-   }
-
-  ngOnInit(): void {
     
+    console.log("response from get");
+    this.configService.getList().subscribe(response => {
+      console.log(response);
+      console.log("response as string");
+      const data = JSON.stringify(response);
+      console.log(data);
+      var obj=JSON.parse(data);
+      console.log(obj);
+      for (let key in obj) {
+        console.log("      key:", key, "value:", obj[key]);
+        this.records = obj[key];
+        console.log("0th");
+        console.log(this.records[0]);
+    }
+    
+    this.records.forEach( (value) => {
+      console.log(value);
+      var todo=new Todo(value.fields.title,value.fields.desc,value.fields.size);
+      console.log("todo inserted is ");
+      console.log(todo);                      
+      console.log("desc");
+      console.log(value.fields.desc);
+      console.log("pushing")
+      this.todos.push(todo);
+      
+});
+console.log("todos arr is")
+console.log(this.todos);
+    });
   }
+
+  ngOnInit(): void {}
 
 deleteTodo(todo: Todo){
   console.log("inside delete property");
